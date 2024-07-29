@@ -8,13 +8,17 @@ import (
 
 func main() {
 	var ans, guesses int
-	var flag bool
-	ans = rand.IntN(100)
+	mn, mx := 1, 101
+	ans = rand.IntN(mx-mn) + mn
 	fmt.Println("Введите число от 1 до 100:")
 	_, err := fmt.Scan(&guesses)
 	if err != nil {
 		log.Fatal(err)
 	}
+	guesser(ans, guesses)
+}
+func guesser(ans, guesses int) {
+	var flag bool
 	for i := 9; i >= 0; i-- {
 		switch {
 		case ans == guesses:
@@ -28,11 +32,11 @@ func main() {
 		if flag == true {
 			switch {
 			case i == 9:
-				fmt.Println("Вы отзадали за 1 попытку.")
+				fmt.Println("Вы отгадали за 1 попытку.")
 			case i <= 8 && i >= 6:
 				fmt.Println("Вы отгадали за", 10-i, "попытки.")
 			default:
-				fmt.Println("Вы отзадали за", 10-i, "попыток.")
+				fmt.Println("Вы отгадали за", 10-i, "попыток.")
 			}
 			i = 0
 		} else {
